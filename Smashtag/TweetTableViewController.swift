@@ -8,26 +8,24 @@
 
 import UIKit
 
-class TweetTableViewController: UITableViewController {
+class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     var tweets = [[Tweet]]()
     
+    var searchText: String? = "#stanford" {
+        didSet {
+            searchTextField?.text = searchText
+            tweets.removeAll()
+            tableView.reloadData()
+            refresh()
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        refresh()
         
-        // make a Twitter request
-        let request = TwitterRequest(search: "#stanford", count: 100)
-        // initiate multithread
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            request.fetchTweets { (newTweets) -> Void in
-                if newTweets.count > 0 {
-                    self.tweets.insert(newTweets, atIndex: 0)
-                    self.tableView.reloadData()
-                }
-            }
-        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,10 +33,42 @@ class TweetTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    func refresh() {
+        if searchText != nil {
+            // make a Twitter request
+            let request = TwitterRequest(search: searchText!, count: 100)
+            // initiate multithread
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                request.fetchTweets { (newTweets) -> Void in
+                    if newTweets.count > 0 {
+                        self.tweets.insert(newTweets, atIndex: 0)
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBOutlet weak var searchTextField: UITextField! {
+        didSet {
+            searchTextField.delegate = self
+            searchTextField.text = searchText
+        }
+    }
+    
+    // return keyboard
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == searchTextField {
+            textField.resignFirstResponder()
+            searchText = textField.text
+        }
+        return true
     }
 
     // MARK: - Table view data source
