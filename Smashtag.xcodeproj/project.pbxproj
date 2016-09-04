@@ -90,10 +90,10 @@
 			isa = PBXGroup;
 			children = (
 				F8AF611D1D7C9A56008545E0 /* Main.storyboard */,
+				F8AF61441D7CA62C008545E0 /* TweetTableViewCell.swift */,
 				F8AF61391D7C9AA7008545E0 /* TweetTableViewController.swift */,
 				F8AF613B1D7C9C53008545E0 /* Twitter */,
 				F8AF61141D7C9A56008545E0 /* Supporting Files */,
-				F8AF61441D7CA62C008545E0 /* TweetTableViewCell.swift */,
 			);
 			path = Smashtag;
 			sourceTree = "<group>";
@@ -443,6 +443,7 @@
 				F8AF61351D7C9A56008545E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F8AF61361D7C9A56008545E0 /* Build configuration list for PBXNativeTarget "SmashtagTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +452,7 @@
 				F8AF61381D7C9A56008545E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

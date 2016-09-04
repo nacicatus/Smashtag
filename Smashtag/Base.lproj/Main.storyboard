@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JbA-et-POY">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tweet Table View Controller-->
@@ -19,11 +20,48 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" rowHeight="161" id="W1M-MO-FQ8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Tweet" rowHeight="161" id="W1M-MO-FQ8" customClass="TweetTableViewCell" customModule="Smashtag" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W1M-MO-FQ8" id="7HZ-2F-SNB">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmg-cb-pLA">
+                                            <rect key="frame" x="64" y="8" width="528" height="20"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YUO-Qr-pQb">
+                                            <rect key="frame" x="8" y="8" width="48" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="7ve-Mi-hiu"/>
+                                                <constraint firstAttribute="width" constant="48" id="WJX-sn-MfT"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drP-JS-n29">
+                                            <rect key="frame" x="64" y="36" width="528" height="116"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="drP-JS-n29" firstAttribute="trailing" secondItem="7HZ-2F-SNB" secondAttribute="trailingMargin" id="3hv-Mj-J9o"/>
+                                        <constraint firstItem="YUO-Qr-pQb" firstAttribute="top" secondItem="7HZ-2F-SNB" secondAttribute="topMargin" id="9Uh-5S-UGZ"/>
+                                        <constraint firstItem="drP-JS-n29" firstAttribute="leading" secondItem="tmg-cb-pLA" secondAttribute="leading" id="9va-ra-SiL"/>
+                                        <constraint firstItem="tmg-cb-pLA" firstAttribute="trailing" secondItem="7HZ-2F-SNB" secondAttribute="trailingMargin" id="CkD-DH-itP"/>
+                                        <constraint firstItem="tmg-cb-pLA" firstAttribute="top" secondItem="7HZ-2F-SNB" secondAttribute="topMargin" id="QiU-VK-b0g"/>
+                                        <constraint firstItem="drP-JS-n29" firstAttribute="bottom" secondItem="7HZ-2F-SNB" secondAttribute="bottomMargin" id="Zwf-vg-zGa"/>
+                                        <constraint firstItem="YUO-Qr-pQb" firstAttribute="leading" secondItem="7HZ-2F-SNB" secondAttribute="leadingMargin" id="jxg-Pa-UJT"/>
+                                        <constraint firstItem="drP-JS-n29" firstAttribute="top" secondItem="tmg-cb-pLA" secondAttribute="bottom" constant="8" symbolic="YES" id="lRT-Ev-mqX"/>
+                                        <constraint firstItem="tmg-cb-pLA" firstAttribute="leading" secondItem="YUO-Qr-pQb" secondAttribute="trailing" constant="8" id="neN-MZ-VoI"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="tweetProfileImageView" destination="7HZ-2F-SNB" id="7f9-OF-cso"/>
+                                    <outlet property="tweetScreenNameLabel" destination="7HZ-2F-SNB" id="xyh-zh-RIq"/>
+                                    <outlet property="tweetTextLabel" destination="drP-JS-n29" id="eeC-ro-wHw"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -32,6 +70,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="QLL-4Q-sqI"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Hac-LZ-u89">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="smV-TG-bi6" eventType="valueChanged" id="Hjq-lp-mdZ"/>
+                        </connections>
+                    </refreshControl>
                     <connections>
                         <outlet property="searchTextField" destination="ueg-Z4-Xz8" id="hec-g6-l1q"/>
                     </connections>
